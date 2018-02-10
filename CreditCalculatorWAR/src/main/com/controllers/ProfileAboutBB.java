@@ -30,6 +30,7 @@ public class ProfileAboutBB {
     public String newPostText;
     public Collection<PostEntity> postsList;
     private PostEntity post = new PostEntity();
+    private UserEntity user = new UserEntity();
     @ManagedProperty("#{textAccountErr}")
     private ResourceBundle textAccountErr;
     private ResourceBundle textAccountErrManual;
@@ -200,21 +201,26 @@ public class ProfileAboutBB {
 
     @PostConstruct
     public void assignData() {
+        System.out.println("nowedobreasdupesadjasdifakjdhsflkjsadhflkjhsdlfkjhe");
         FacesContext context = FacesContext.getCurrentInstance();
         textAccountErrManual = ResourceBundle.getBundle("textAccountErr", context.getViewRoot().getLocale());
 
-        this.newPostImage = this.sessionService.currentUser.getProfileImage();
+        this.user = this.sessionService.currentProfile;
+        this.user = this.userDAO.find(this.sessionService.currentProfile.getIdUser());
+        System.out.println(this.user.getIdUser() + "dupa");
+
+        this.newPostImage = this.user.getProfileImage();
         this.newPostText = "";
-        this.postsList = this.sessionService.currentUser.getPostsWhereUserIsAuthor();
+        this.postsList = this.user.getPostsWhereUserIsOwner();
         this.renderTextarea = false;
         this.renderInput = false;
-        this.postsCount = this.sessionService.currentUser.getPostsWhereUserIsAuthor().size();
+        this.postsCount = this.user.getPostsWhereUserIsOwner().size();
         this.subscribersCount = 11;
-        this.author = this.sessionService.getCurrentUser().getUsername();
-        this.description = this.sessionService.getCurrentUser().getDescription();
-        this.email = this.sessionService.getCurrentUser().getEmail();
-        this.city = this.sessionService.getCurrentUser().getCity();
-        this.userPhoto = this.sessionService.getCurrentUser().getProfileImage();
+        this.author = this.user.getUsername();
+        this.description = this.user.getDescription();
+        this.email = this.user.getEmail();
+        this.city = this.user.getCity();
+        this.userPhoto = this.user.getProfileImage();
     }
 
     public void editDescription() {
@@ -232,6 +238,7 @@ public class ProfileAboutBB {
         userUpdate.setDescription(this.description);
         this.userDAO.merge(userUpdate);
         this.renderTextarea = !this.renderTextarea;
+        this.assignData();
         return null;
     }
 
@@ -241,11 +248,14 @@ public class ProfileAboutBB {
         this.userDAO.merge(userUpdate);
         System.out.println(this.city);
         this.renderInput = !this.renderInput;
+        this.assignData();
         return null;
     }
 
     public String addPost() {
-        this.sessionService.currentProfile = this.sessionService.currentUser;
+        System.out.println(this.sessionService.currentUser.getIdUser());
+        System.out.println(this.sessionService.currentProfile.getIdUser());
+        System.out.println("szzz");
         this.post.setUserByOwnerId(this.sessionService.currentProfile);
         this.post.setUserByAuthorId(this.sessionService.currentUser);
         this.post.setData(new Timestamp(System.currentTimeMillis()));
@@ -259,7 +269,7 @@ public class ProfileAboutBB {
 
         }
         this.post.setDescription("");
-        this.postsList = this.postDAO.getPostsWhereOwnerId(this.sessionService.currentUser.getIdUser());
+        this.postsList = this.postDAO.getPostsWhereOwnerId(this.sessionService.currentProfile.getIdUser());
         this.postsCount = this.postsList.size();
         return null;
     }
@@ -273,11 +283,14 @@ public class ProfileAboutBB {
     }
 
     public String changePhotoUrl() {
-        UserEntity userUpdate = this.sessionService.getCurrentUser();
+        UserEntity userUpdate = this.sessionService.currentProfile;
         userUpdate.setProfileImage(this.userPhoto);
         this.userDAO.merge(userUpdate);
         this.showChangePhotoInput = false;
-        return null;
+        this.user = this.userDAO.find(this.sessionService.currentProfile.getIdUser());
+        this.sessionService.currentProfile = this.userDAO.find(this.sessionService.currentProfile.getIdUser());
+        this.postsList = this.postDAO.getPostsWhereOwnerId(this.sessionService.currentProfile.getIdUser());
+        return "goprofile";
     }
 }
 

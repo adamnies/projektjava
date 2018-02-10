@@ -29,82 +29,102 @@
             <!--content-->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2" style="margin-top: 100px">
-                        <div class="col-md-5 col-md-offset-1">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <h:graphicImage
-                                            url="http://www.gazetamarketingowa.pl/wp-content/uploads/2015/09/twitter-01200.jpg"
-                                            styleClass="bordersuper frame">
-                                    </h:graphicImage>
+                    <h:panelGroup rendered="#{sessionService.currentUser == null}">
+                        <div class="col-md-8 col-md-offset-2" style="margin-top: 100px">
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <h:graphicImage
+                                                url="http://www.gazetamarketingowa.pl/wp-content/uploads/2015/09/twitter-01200.jpg"
+                                                styleClass="bordersuper frame">
+                                        </h:graphicImage>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="container-fluid">
+                                    <div class="row bordersuper frame">
+                                        <h:form style="padding: 30px; margin-top: 40px;">
+                                            <div class="row">
+                                                <div class="col-md-2 textright">
+                                                    <h:outputLabel for="userEmail"
+                                                                   value="#{textIndex.EMAIL}"/>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h:inputText id="userEmail" class="form-control"
+                                                                 value="#{loginBB.user.email}"
+                                                                 required="true"
+                                                                 requiredMessage="#{textIndex.REQUIRED_EMAIL}"
+                                                                 validatorMessage="#{textIndex.VALIDATOR_REGEX_EMAIL}">
+                                                        <f:validateRegex
+                                                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$">
+
+                                                        </f:validateRegex>
+                                                    </h:inputText>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+                                            <div class="row" style="padding-top: 30px;">
+                                                <div class="col-md-2 textright">
+                                                    <h:outputLabel for="userPassword"
+                                                                   value="#{textIndex.PASSWORD}"/>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <h:inputSecret id="userPassword" class="form-control"
+                                                                   value="#{loginBB.user.password}"
+                                                                   required="true"
+                                                                   requiredMessage="#{textIndex.REQUIRED_PASSWORD}"
+                                                                   converterMessage="Amount must be a number"
+                                                                   validatorMessage="#{textIndex.VALIDATOR_LENGTH_PASSWORD}">
+                                                        <f:validateLength minimum="6" maximum="20"></f:validateLength>
+                                                    </h:inputSecret>
+                                                </div>
+                                                <div class="col-md-2"></div>
+                                            </div>
+
+                                            <div class="row" style="padding-top: 30px;">
+                                                <div class="col-md-4 col-md-offset-4" style="text-align: center">
+                                                    <h:commandButton value="#{textIndex.SIGNIN}"
+                                                                     action="#{loginBB.signIn()}"
+                                                                     update="msg"
+                                                                     class="btn btn-secondary"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                        <h:form>
+                                            <div class="row" style="padding-top: 30px;">
+                                                <div class="col-md-8 col-md-offset-2" style="text-align: center">
+                                                    <h:commandLink value="#{textIndex.GOTO_SIGNUP_PAGE}"
+                                                                   action="create-account?faces-redirect=true"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="container-fluid">
-                                <div class="row bordersuper frame">
-                                    <h:form style="padding: 30px; margin-top: 40px;">
-                                        <div class="row">
-                                            <div class="col-md-2 textright">
-                                                <h:outputLabel for="userEmail"
-                                                               value="#{textIndex.EMAIL}"/>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h:inputText id="userEmail" class="form-control"
-                                                             value="#{loginBB.user.email}"
-                                                             required="true"
-                                                             requiredMessage="#{textIndex.REQUIRED_EMAIL}"
-                                                             validatorMessage="#{textIndex.VALIDATOR_REGEX_EMAIL}">
-                                                    <f:validateRegex
-                                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$">
+                    </h:panelGroup>
 
-                                                    </f:validateRegex>
-                                                </h:inputText>
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                        </div>
-                                        <div class="row" style="padding-top: 30px;">
-                                            <div class="col-md-2 textright">
-                                                <h:outputLabel for="userPassword"
-                                                               value="#{textIndex.PASSWORD}"/>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <h:inputSecret id="userPassword" class="form-control"
-                                                             value="#{loginBB.user.password}"
-                                                             required="true"
-                                                             requiredMessage="#{textIndex.REQUIRED_PASSWORD}"
-                                                             converterMessage="Amount must be a number"
-                                                             validatorMessage="#{textIndex.VALIDATOR_LENGTH_PASSWORD}">
-                                                    <f:validateLength minimum="6" maximum="20"></f:validateLength>
-                                                </h:inputSecret>
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                        </div>
 
-                                        <div class="row" style="padding-top: 30px;">
-                                            <div class="col-md-4 col-md-offset-4" style="text-align: center">
-                                                <h:commandButton value="#{textIndex.SIGNIN}"
-                                                                 action="#{loginBB.signIn()}"
-                                                                 update="msg"
-                                                                 class="btn btn-secondary"/>
-                                            </div>
-                                        </div>
-                                    </h:form>
-                                    <h:form>
-                                        <div class="row" style="padding-top: 30px;">
-                                            <div class="col-md-8 col-md-offset-2" style="text-align: center">
-                                                <h:commandLink value="#{textIndex.GOTO_SIGNUP_PAGE}"
-                                                               action="create-account?faces-redirect=true"/>
-                                            </div>
-                                        </div>
-                                    </h:form>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div><!--END content-->
+
+
+            <h:form rendered="#{sessionService.currentUser != null}">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2" style="margin-top: 100px">
+                            <div class="col-md-4 col-md-offset-4 textalign">
+                                <h:graphicImage
+                                        url="https://vignette.wikia.nocookie.net/dahobbit/images/4/47/Gandalf.png/revision/latest?cb=20151204000046">
+                                </h:graphicImage>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--END content-->
+            </h:form>
+
+
         </ui:define>
     </ui:composition>
 </h:body>

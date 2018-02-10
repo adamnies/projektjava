@@ -15,7 +15,13 @@
                     <div class="col-sm-1 col-md-1 col-md-offset-1">
                         <div class="navbar-header">
                             <h:form style="font-size: 140%; font-family: Helvetica">
-                                <h:commandLink action="index?faces-redirect=true" styleClass="navbar-brand-custom">
+                                <h:commandLink action="elo" styleClass="navbar-brand-custom" rendered="#{sessionService.currentUser == null}">
+                                    <h:graphicImage style="width: 50px"
+                                                    url="#{resource['template:img/abc.png']}"/>
+                                    #{textTemplates.PAGE}
+                                </h:commandLink>
+
+                                <h:commandLink action="eloa" styleClass="navbar-brand-custom" rendered="#{sessionService.currentUser != null}">
                                     <h:graphicImage style="width: 50px"
                                                     url="#{resource['template:img/abc.png']}"/>
                                     #{textTemplates.PAGE}
@@ -54,18 +60,18 @@
                                 <h:graphicImage style="width: 25px"
                                                 url="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-256.png"/>
                             </h:commandLink>
-                            <h:commandLink action="profile?faces-redirect=true" style="padding: 10px;">
+                            <h:commandLink action="#{profilesBB.showCurrentUserProfile()}" style="padding: 10px;">
                                 <h:graphicImage style="width: 25px"
                                                 url="http://cdn.onlinewebfonts.com/svg/img_76927.png"/>
+                            </h:commandLink>
+                            <h:commandLink action="/user/password?faces-redirect=true" style="padding: 10px;">
+                                <h:graphicImage style="width: 25px"
+                                                url="https://cdn2.iconfinder.com/data/icons/insurance-3/32/security-512.png"/>
                             </h:commandLink>
                         </h:form>
                     </div>
                     <div class="col-sm-1 col-md-1 col-md-offset-8 col-sm-offset-0">
-                        <!--<h:selectOneMenu value="#{user.favCoffee1}" styleClass="select-style"-->
-                        <!--style="width: auto; margin: 15px;">-->
-                        <!--<f:selectItem itemValue="polish" itemLabel="PL" style="text-align: center"/>-->
-                        <!--<f:selectItem itemValue="english" itemLabel="EN"/>-->
-                        <!--</h:selectOneMenu>-->
+
                     </div>
                 </div>
             </div>

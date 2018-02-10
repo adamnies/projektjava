@@ -64,8 +64,11 @@ public class LoginBB {
 
             System.out.println("Zalogowano");
             this.sessionService.currentUser = lista.get(0);
+            this.sessionService.currentProfile = lista.get(0);
             System.out.println(this.sessionService.getCurrentUser().getEmail());
-            return "profile";
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("user", lista.get(0));
+            return "goprofile";
         } else {
             ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     textAccountErrManual.getString("emailOrPasswordIncorrect"), null));
@@ -78,7 +81,9 @@ public class LoginBB {
         System.out.println("logout");
         FacesContext ctx = FacesContext.getCurrentInstance();
         ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                textAccountErrManual.getString("logoutSuccess"), null));
+                textAccountErrManual.getString("password"), null));
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().remove("user");
         return "index";
     }
 

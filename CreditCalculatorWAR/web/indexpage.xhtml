@@ -11,9 +11,7 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
-    <f:metadata>
-        <f:viewParam name="search" value="#{profilesBB.searchParam}" />
-    </f:metadata>
+
 </h:head>
 <h:body>
     <ui:composition template="/templates/pages/index-template.xhtml">
@@ -29,24 +27,17 @@
 
 
             <!--content-->
-            <div class="container-fluid bordersupder1">
-                <div class="col-md-8 col-md-offset-2">
-
-                    <div class="col-md-3">
-                        <ui:include src="/profile-about.xhtml"/>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2" style="margin-top: 100px">
+                        <div class="col-md-4 col-md-offset-4 textalign">
+                            <h:graphicImage
+                                    url="http://www.tecnisa-campos.com/wp-content/themes/tecnisa/img/not-found.png">
+                            </h:graphicImage>
+                        </div>
                     </div>
-
-                    <div class="col-md-6">
-                        <ui:include src="/profile-posts.xhtml"/>
-                    </div>
-
-                    <div class="col-md-2 borderPro">
-                        <ui:include src="/profile-friends.xhtml"/>
-                    </div>
-
                 </div>
             </div><!--END content-->
-
         </ui:define>
     </ui:composition>
 </h:body>

@@ -43,6 +43,18 @@ public class UserDAO {
         return list;
     }
 
+    public List<UserEntity> getUsersListWhereUsername(String username) {
+        List<UserEntity> list = null;
+        Query query = entityManager.createQuery("select u from UserEntity u where u.username=:username");
+        query.setParameter("username", username);
+        try {
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 
     public List<UserEntity> getUsersListWhereEmailAndPassword(String email, String password) {
         List<UserEntity> list = null;
@@ -50,8 +62,8 @@ public class UserDAO {
         query.setParameter("email", email);
         query.setParameter("password", password);
 
-            list = query.getResultList();
-            System.out.println(list.size());
+        list = query.getResultList();
+        System.out.println(list.size());
 
         return list;
     }

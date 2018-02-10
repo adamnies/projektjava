@@ -28,4 +28,123 @@
             <default-locale>pl</default-locale>
         </locale-config>
     </application>
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{loginBB.signIn()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/user/password.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.showCurrentUserProfile()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/user/password.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>elo</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/user/password.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>eloa</from-outcome>
+            <to-view-id>/indexpage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>elo</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>eloa</from-outcome>
+            <to-view-id>/indexpage.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.showCurrentUserProfile()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/indexpage.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.showCurrentUserProfile()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.searchUser()}</from-action>
+            <from-outcome>indexowe</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.searchUser()}</from-action>
+            <from-outcome>profilowe</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profileAboutBB.changePhotoUrl()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/profile.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profilesBB.showCurrentUserProfile()}</from-action>
+            <from-outcome>goprofile</from-outcome>
+            <to-view-id>/profile.xhtml?faces-redirect=true</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/user/password.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{accountBB.changePassword()}</from-action>
+            <from-outcome>stronaglowna</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{accountBB.changePassword()}</from-action>
+            <from-outcome>zmiana</from-outcome>
+            <to-view-id>/user/password.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+
+</h:head>
+<h:body>
+	<ui:composition template="/templates/pages/index-template.xhtml">
+		<ui:define name="pageContent">
+			<!--messages-->
+			<div class="container-fluid">
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-md-4 col-md-offset-4 textalign">
+						<h:messages id="msg" styleClass="messages"/>
+					</div>
+				</div>
+			</div><!--END messages-->
+
+
+			<!--content-->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2" style="margin-top: 100px">
+						<div class="col-md-6 col-md-offset-3">
+							<div class="container-fluid">
+								<div class="row">
+									<h:form style="padding: 30px; margin-top: 40px;">
+										<div class="row">
+											<div class="col-md-2 textright">
+												<h:outputLabel for="idzae"
+															   value="#{textIndex.USERNAME}"/>
+											</div>
+											<div class="col-md-8">
+												<h:inputText id="idzae"
+															 class="form-control"
+															 value="#{registerBB.user.username}"
+															 required="true"
+															 requiredMessage="#{textIndex.REQUIRED_PASSWORD}"
+															 validatorMessage="#{textIndex.VALIDATOR_LENGTH_PASSWORD}">
+													<f:validateLength minimum="6" maximum="20"></f:validateLength>
+												</h:inputText>
+											</div>
+											<div class="col-md-2"></div>
+										</div>
+										<div class="row" style="padding-top: 30px;">
+											<div class="col-md-2 textright">
+												<h:outputLabel for="idza"
+															   value="#{textIndex.EMAIL}"/>
+											</div>
+											<div class="col-md-8">
+												<h:inputText id="idza"
+															 class="form-control"
+															 value="#{registerBB.user.email}"
+															 required="true"
+															 requiredMessage="#{textIndex.REQUIRED_EMAIL}"
+															 validatorMessage="#{textIndex.VALIDATOR_REGEX_EMAIL}">
+													<f:validateRegex
+															pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$">
+													</f:validateRegex>
+												</h:inputText>
+											</div>
+											<div class="col-md-2"></div>
+										</div>
+
+										<div class="row" style="padding-top: 30px;">
+											<div class="col-md-2 textright">
+												<h:outputLabel for="idzaz"
+															   value="#{textIndex.PASSWORD}"/>
+											</div>
+											<div class="col-md-8">
+												<h:inputSecret id="idzaz"
+															   class="form-control"
+															   type="password"
+															   value="#{registerBB.user.password}"
+															   required="true"
+															   requiredMessage="#{textIndex.REQUIRED_PASSWORD}"
+															   validatorMessage="#{textIndex.VALIDATOR_LENGTH_PASSWORD}">
+													<f:validateLength minimum="6" maximum="20"></f:validateLength>
+												</h:inputSecret>
+											</div>
+											<div class="col-md-2"></div>
+										</div>
+
+										<div class="row" style="padding-top: 30px;">
+											<div class="col-md-4 col-md-offset-4" style="text-align: center">
+												<h:commandButton value="#{textIndex.SIGNUP}"
+																 action="#{registerBB.signUp()}"
+																 update="msg"
+																 class="btn btn-secondary buttonIndex"/>
+											</div>
+										</div>
+									</h:form>
+
+									<h:form>
+										<div class="row" style="padding-top: 30px;">
+											<div class="col-md-8 col-md-offset-2" style="text-align: center">
+												<h:commandLink value="#{textIndex.GOTO_SIGNIN_PAGE}"
+															   action="index?faces-redirect=true"/>
+											</div>
+										</div>
+									</h:form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div><!--END content-->
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
