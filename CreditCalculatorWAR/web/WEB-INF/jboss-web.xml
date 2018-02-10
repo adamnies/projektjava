@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>/oblicz-kredyt</context-root>
+</jboss-web>

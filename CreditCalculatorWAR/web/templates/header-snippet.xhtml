@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+
+    <h:head>
+        <h:outputStylesheet name="/css/bootstrap.css"></h:outputStylesheet>
+    </h:head>
+
+    <h:body>
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-1 col-md-1 col-md-offset-1">
+                        <div class="navbar-header">
+                            <h:form style="font-size: 140%; font-family: Helvetica">
+                                <h:commandLink action="index?faces-redirect=true" styleClass="navbar-brand-custom">
+                                    <h:graphicImage style="width: 50px"
+                                                    url="#{resource['template:img/abc.png']}"/>
+                                    #{textTemplates.PAGE}
+                                </h:commandLink>
+
+                                <!--<h:commandLink action="profile?faces-redirect=true" styleClass="navbar-brand-custom"-->
+                                <!--rendered="#{sessionService.currentUser != null}">-->
+                                <!--<h:graphicImage style="width: 50px"-->
+                                <!--url="#{resource['template:img/abc.png']}"/>-->
+                                <!--#{textTemplates.PAGE}-->
+                                <!--</h:commandLink>-->
+                            </h:form>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 col-lg-offset-3"
+                         style="margin-top: 8px;">
+                        <h:form class="form-inline" rendered="#{sessionService.currentUser != null}">
+                            <h:inputText class="form-control mr-sm-2"
+                                         type="text"
+                                         value="#{profilesBB.search}"
+                                         placeholder="#{textIndex.SEARCH}">
+
+                            </h:inputText>
+                            <h:commandButton class="btn btn-outline-success my-2 my-sm-0"
+                                             type="submit"
+                                             action="#{profilesBB.searchUser()}"
+                                             value="#{textIndex.SEARCH}">
+
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+                    <div class="col-lg-2 col-lg-offset-1" style="margin-top: 8px;">
+                        <h:form class="form-inline" rendered="#{sessionService.currentUser != null}">
+                            <h:commandLink action="#{loginBB.logout()}">
+                                <!--#{textIndex.LOGOUT}-->
+                                <h:graphicImage style="width: 25px"
+                                                url="https://cdn2.iconfinder.com/data/icons/picons-essentials/57/logout-256.png"/>
+                            </h:commandLink>
+                            <h:commandLink action="profile?faces-redirect=true" style="padding: 10px;">
+                                <h:graphicImage style="width: 25px"
+                                                url="http://cdn.onlinewebfonts.com/svg/img_76927.png"/>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-md-offset-8 col-sm-offset-0">
+                        <!--<h:selectOneMenu value="#{user.favCoffee1}" styleClass="select-style"-->
+                        <!--style="width: auto; margin: 15px;">-->
+                        <!--<f:selectItem itemValue="polish" itemLabel="PL" style="text-align: center"/>-->
+                        <!--<f:selectItem itemValue="english" itemLabel="EN"/>-->
+                        <!--</h:selectOneMenu>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</ui:composition>

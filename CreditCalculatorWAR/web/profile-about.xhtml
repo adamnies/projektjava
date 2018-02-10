@@ -1,0 +1,176 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+
+</h:head>
+<h:body>
+    <div class="row" style="height: 250px;">
+        <div class="container-fluid" id="new">
+            <div class="row" style="margin-top: 20px; padding: 10px;">
+                <div class="col-md-4">
+                    <h:form>
+                        <h:commandLink action="#{profileAboutBB.displayChangePhotoInput()}">
+                            <h:graphicImage url="#{profileAboutBB.userPhoto}"
+                                            style="width: 70px; height: 70px; border-radius: 50%; border: 3px solid rgba(160,195,202,0.53)">
+                            </h:graphicImage>
+                        </h:commandLink>
+                    </h:form>
+                </div>
+                <div class="col-md-8" style="margin-top: 10px;">
+                    <div class="row">
+                        <div class="fontProBlack" style="text-align: center">
+                            #{profileAboutBB.author}
+                        </div>
+                        <div class="fontPro" style="text-align: center">
+                            #{profileAboutBB.email}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h:form rendered="#{profileAboutBB.showChangePhotoInput}">
+                    <div class="row">
+                        <h:inputText styleClass="form-control"
+                                     style="width: 90%; margin: 5%"
+                                     value="#{profileAboutBB.userPhoto}">
+                        </h:inputText>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2 col-lg-offset-4">
+                            <h:commandButton action="#{profileAboutBB.changePhotoUrl()}"
+                                             value="#{textProfile.PROFILE_CHANGE_DESCRIPTION}"
+                                             disabled="#{empty profileAboutBB.description}"
+                                             styleClass="btn btn-primary">
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6 ">
+                    <div class="row fontProSmallBlue2" style="padding: 10px; text-align: center">
+                        #{textProfile.POSTS}
+                    </div>
+                    <div class="row fontProSmallBlue3" style="text-align: center">
+                        #{profileAboutBB.postsCount}
+                    </div>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 30px;">
+                    <div class="row fontProSmallBlue2" style="padding: 10px; text-align: center">
+                        #{textProfile.SUBSCRIBERS}
+                    </div>
+                    <div class="row fontProSmallBlue3" style="text-align: center">
+                        #{profileAboutBB.subscribersCount}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--dane-->
+
+
+    <div class="row" style="position:relative; height: 200px; margin-top: 50px;">
+        <div class="container-fluid" id="new1">
+            <!--opis profilu-->
+            <div class="row" style="margin-top: 2px; padding: 10px; text-align: center">
+
+                <!--opis title-->
+                <div class="row" style="text-align: center">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h:outputLabel value="#{textProfile.PROFILE_ABOUT}"
+                                       styleClass="fontProBlueDark"
+                                       style="text-align: center; margin-top: 10px;">
+                        </h:outputLabel>
+                    </div>
+                    <div class="col-md-3">
+                        <h:form>
+                            <h:commandLink action="#{profileAboutBB.editDescription()}">
+                                <h:graphicImage
+                                        url="http://simpleicon.com/dev/wp-content/uploads/pencil.png"
+                                        style="width: 50%; margin: 10px;">
+                                </h:graphicImage>
+                            </h:commandLink>
+                        </h:form>
+                    </div>
+                </div><!--opis koniec title-->
+
+                <!--opis o mnie-->
+                <div class="row">
+                    <h:outputText value="#{profileAboutBB.description}"
+                                  id="abc"
+                                  rendered="#{!profileAboutBB.renderTextarea}">
+                    </h:outputText>
+                </div>
+                <div class="row">
+                    <h:form rendered="#{profileAboutBB.renderTextarea}">
+                        <h:inputTextarea value="#{profileAboutBB.description}"
+                                         styleClass="form-control"
+                                         maximum="100"
+                                         validatorMessage="Liczba znakow opisu 100"
+                                         style="width: 90%; margin: 5%">
+                            <f:ajax event="keyup" delay="200" render="buttonId"/>
+                            <f:validateLength maximum="100"/>
+                        </h:inputTextarea>
+                        <h:commandButton action="#{profileAboutBB.saveDescription()}"
+                                         value="#{textProfile.PROFILE_CHANGE_DESCRIPTION}"
+                                         id="buttonId"
+                                         disabled="#{empty profileAboutBB.description}"
+                                         styleClass="btn btn-primary">
+                        </h:commandButton>
+                    </h:form>
+                </div><!--opis o mnie koniec-->
+
+                <!--miasto-->
+                <div class="row" style="margin-top: 50px;">
+                    <h:form>
+                        <div class="col-md-3 textalign" style="padding: 5px;">
+                            <h:outputText value="#{textProfile.CITY}: "
+                                          styleClass="fontProSmallBlue2 textalign"
+                                          style="margin-left: 5px;">
+                            </h:outputText>
+                        </div>
+                        <div class="col-md-6">
+                            <h:inputText value="#{profileAboutBB.city}"
+                                         styleClass="form-control"
+                                         style="width: 100%;"
+                                         rendered="#{profileAboutBB.renderInput}">
+                                <f:ajax event="keyup" delay="200" render="buttonIda"/>
+                            </h:inputText>
+                            <h:outputText value="#{profileAboutBB.city}"
+                                          styleClass="fontProBlueNormal textalign"
+                                          style="margin-left: 5px;"
+                                          rendered="#{!profileAboutBB.renderInput}">
+                            </h:outputText>
+                        </div>
+                        <div class="col-md-2">
+                            <h:commandButton value="OK"
+                                             action="#{profileAboutBB.saveCity()}"
+                                             styleClass="btn btn-primary"
+                                             id="buttonIda"
+                                             disabled="#{empty profileAboutBB.city}"
+                                             rendered="#{profileAboutBB.renderInput}">
+                            </h:commandButton>
+
+                            <h:commandLink action="#{profileAboutBB.editCity()}">
+                                <h:graphicImage
+                                        url="http://simpleicon.com/dev/wp-content/uploads/pencil.png"
+                                        style="width: 100%; margin: 10px;"
+                                        rendered="#{!profileAboutBB.renderInput}">
+                                </h:graphicImage>
+                            </h:commandLink>
+                        </div>
+                    </h:form>
+                </div><!--koniec miasto-->
+
+            </div><!--koniec opisu-->
+        </div>
+    </div>
+</h:body>
+</html>
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+
+</h:head>
+<h:body>
+    <h:form>
+        <div class="borderPro">
+            <div class="row" style="margin: 20px;">
+                <div class="col-md-2">
+                    <h:graphicImage url="#{profileAboutBB.newPostImage}"
+                                    style="margin-top: 10px; width: 50px; height: 50px; border-radius: 50%; border: 3px solid rgba(160,195,202,0.53)">
+                    </h:graphicImage>
+                </div>
+                <div class="col-md-10">
+                    <h:inputTextarea value="#{profileAboutBB.post.description}"
+                                     styleClass="form-control">
+                        <f:ajax event="keyup" delay="200" render="buttonIdd"/>
+                    </h:inputTextarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+
+                </div>
+                <div class="col-md-2">
+                    <!--disabled="#{profilePostsBB.post.description != ''}"-->
+                    <h:commandButton action="#{profileAboutBB.addPost()}"
+                                     styleClass="btn btn-default"
+                                     id="buttonIdd"
+                                     disabled="#{empty profileAboutBB.post.description}"
+                                     value="#{textProfile.ADD}">
+                    </h:commandButton>
+                </div>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div>
+    </h:form>
+
+    <div style="margin-bottom: 100px;">
+        <ui:repeat value="#{profileAboutBB.postsList}" var="post">
+            <div class="borderPro">
+                <div class="row" style="margin: 20px;">
+                    <div class="col-md-2">
+                        <h:graphicImage url="#{profileAboutBB.newPostImage}"
+                                        style="margin-top: 10px; width: 50px; height: 50px; border-radius: 50%; border: 3px solid rgba(160,195,202,0.53)">
+                        </h:graphicImage>
+                    </div>
+                    <div class="col-md-10" style="padding: 10px;">
+                        <div class="row">
+                            <h:outputText value="Autor: " style="font-weight:bold">
+
+                            </h:outputText>
+                            <h:outputText value="#{post.userByAuthorId.username}">
+
+                            </h:outputText>
+
+                            <h:outputText value="#{post.data}" style="float: right;">
+                                <f:convertDateTime pattern="dd.MM.yyyy HH:mm"/>
+                            </h:outputText>
+                            <h:outputText value="Data: " style="font-weight:bold; float: right;">
+
+                            </h:outputText>
+                        </div>
+                        <div class="row description">
+                            #{post.description}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:repeat>
+    </div>
+</h:body>
+</html>
+
+

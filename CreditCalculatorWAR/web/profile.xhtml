@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
+
+</h:head>
+<h:body>
+    <ui:composition template="/templates/pages/index-template.xhtml">
+        <ui:define name="pageContent">
+            <!--messages-->
+            <div class="container-fluid">
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-4 col-md-offset-4 textalign">
+                        <h:messages id="msg" styleClass="messages"/>
+                    </div>
+                </div>
+            </div><!--END messages-->
+
+
+            <!--content-->
+            <div class="container-fluid bordersupder1">
+                <div class="col-md-8 col-md-offset-2">
+
+                    <div class="col-md-3">
+                        <ui:include src="/profile-about.xhtml"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ui:include src="/profile-posts.xhtml"/>
+                    </div>
+
+                    <div class="col-md-2 borderPro">
+                        <ui:include src="/profile-friends.xhtml"/>
+                    </div>
+
+                </div>
+            </div><!--END content-->
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
